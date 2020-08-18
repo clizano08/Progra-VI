@@ -1,0 +1,33 @@
+﻿@model Infraestructure.Models.Aseguradora
+
+@{
+    ViewBag.Title = "Aseguradora";
+}
+
+<h2>Detalles de Aseguradora</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdAseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdAseguradora)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdAseguradora }, new { @class = "btn  btn-primary btn-lg" }) 
+    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-primary btn-lg" })
+</p>

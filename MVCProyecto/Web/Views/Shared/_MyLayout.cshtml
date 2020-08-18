@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Control de Activos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/toastr.css">
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header ">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Control de Activos", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Mantenimiento <span class="glyphicon  glyphicon glyphicon-plus" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Vendedor", "Index", "Vendedor")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Activo", "Index", "Activo")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Categoría del Activo", "Index", "CategoriaActivo")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Marca", "Index", "Marca")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Aseguradora", "Index", "Aseguradora")</li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Procesos   <span class="glyphicon  glyphicon-cog" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cálculo Depreciación", "MainDepreciacion", "Depreciacion")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reportes <span class="glyphicon  glyphicon glyphicon-print" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Catálogo de Activos (PDF)", "List", "Reporte")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Activo por ID", "FilterActivoByID", "Reporte")</li>
+                            <li class="nav-divider"></li>
+                            <li>@Html.ActionLink("Vencimiento de Fechas Activo", "IndexGarantia", "Reporte")</li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Administración   <span class="glyphicon glyphicon-lock" />
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Seguridad", "Index", "Usuario")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Autoevaluacion", "Evaluacion", "Home")</li>
+
+                </ul>
+
+            
+                <ul class="nav navbar-nav ">
+                    <li>
+                        <a href="@Url.Action("Logout", "Login")">
+                            Logout
+                            <span class="glyphicon   glyphicon-log-out" aria-hidden="true"></span>
+                        </a>
+
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @{
+                            string nombre = "";
+                            Infraestructure.Models.Usuario oUsuario;
+                            // Validar si vienen datos en la session
+                            if (Session["User"] != null)
+                            {
+                                // Casting
+                                oUsuario = Session["User"] as Infraestructure.Models.Usuario;
+
+                                if (oUsuario != null)
+                                {
+                                    nombre = $"{oUsuario.Nombre} {oUsuario.Apellidos}";
+                                }
+                            }
+
+
+                        }
+
+                        <a href="#">
+                             @nombre
+                            <span class="glyphicon  glyphicon-user " aria-hidden="true"></span>
+                        </a>
+
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2020 - Proyecto Programación VI.  </p>
+            <p> Carlos Lizano</p>
+            <p>Version @typeof(Web.MvcApplication).Assembly.GetName().Version.ToString()</p>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

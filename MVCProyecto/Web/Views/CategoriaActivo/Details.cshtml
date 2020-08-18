@@ -1,0 +1,33 @@
+﻿@model Infraestructure.Models.CategoriaActivo
+
+@{
+    ViewBag.Title = "Categoria de Activo";
+}
+
+<h2>Detalles de Categoria</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCategoriaActivo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdCategoriaActivo }, new { @class = "btn  btn-primary btn-lg" }) 
+    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-primary btn-lg" })
+</p>

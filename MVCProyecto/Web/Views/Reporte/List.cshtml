@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+@{
+    ViewBag.Title = "Reporte";
+}
+
+<h2>Catálogo de Activos</h2>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
+@Html.Raw(mensaje);
+}
+<p>
+    @Html.ActionLink("Importar a PDF", "CreatePdfActivo", "Reporte",new {@class="btn btn-danger btn-block" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoDolares)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoSeguro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imgActivo)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdMarca)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdActivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroSerie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorActual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoDolares)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VencimientoGarantia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VencimientoSeguro)
+            </td>
+            <td>
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imgActivo)" id="ImagenActivo" style="height:75px;width:75px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaActivo.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+            </td>
+
+        </tr>
+    }
+
+</table>

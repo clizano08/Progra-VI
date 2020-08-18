@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Infraestructure.Models.Aseguradora>
+
+@{
+    ViewBag.Title = "Aseguradora";
+}
+
+<h2>Lista de Aseguradoras</h2>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
+@Html.Raw(mensaje);
+}
+<p>
+    @Html.ActionLink("Nuevo", "Create" ,null, new { @class = "btn btn-info btn-md" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdAseguradora }, new { @class = "btn  btn-primary btn-md " }) 
+                @Html.ActionLink("Detalles", "Details", new { id = item.IdAseguradora }, new { @class = "btn btn-warning btn-md " }) 
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAseguradora }, new { @class = "btn  btn-danger  btn-md " })
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/toastjs")
+    <script>
+    $(document).ready(function () {
+    console.log("Entro a JQuery")
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1200",
+        "timeOut": "5500",
+        "extendedTimeOut": "1200",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    // Recibe los parámetros del Controller
+    var option = '@TempData["Action"]'
+    var message = '@TempData["Mensaje"]'
+
+
+    if (option == 'S') {
+        toastr.success("La Aseguradora fue salvado correctamente");
+    }
+
+
+    if (option == 'D') {
+        toastr.warning("La Aseguradora fue borrado correctamente");
+    }
+
+
+    if (option == 'U') {
+        toastr.info("La Aseguradora fue actualizado correctamente");
+    }
+
+    if (option == 'E') {
+            toastr.error("Se ha producido un error :" + message);
+    }
+
+
+    // Cambiar el color del fondo del Grid.
+    $(".table tbody tr:even").css("background-color", "#ddd");
+    });
+
+
+
+    </script>
+
+}

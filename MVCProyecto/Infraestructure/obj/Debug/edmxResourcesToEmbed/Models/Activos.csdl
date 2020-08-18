@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ActivosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aseguradora">
+    <Key>
+      <PropertyRef Name="IdAseguradora" />
+    </Key>
+    <Property Name="IdAseguradora" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_Activo_Aseguradora" FromRole="Aseguradora" ToRole="Activo" />
+  </EntityType>
+  <EntityType Name="CategoriaActivo">
+    <Key>
+      <PropertyRef Name="IdCategoriaActivo" />
+    </Key>
+    <Property Name="IdCategoriaActivo" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_Activo_CategoriaActivo" FromRole="CategoriaActivo" ToRole="Activo" />
+  </EntityType>
+  <EntityType Name="CategoriaUsuario">
+    <Key>
+      <PropertyRef Name="IdCategoriaUsuario" />
+    </Key>
+    <Property Name="IdCategoriaUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_CategoriaUsuario" FromRole="CategoriaUsuario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Marca">
+    <Key>
+      <PropertyRef Name="IdMarca" />
+    </Key>
+    <Property Name="IdMarca" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_Activo_Marca" FromRole="Marca" ToRole="Activo" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdCategoriaUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Contrasenna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CategoriaUsuario" Relationship="Self.FK_Usuario_CategoriaUsuario" FromRole="Usuario" ToRole="CategoriaUsuario" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_Activo_Usuario" FromRole="Usuario" ToRole="Activo" />
+  </EntityType>
+  <EntityType Name="Vendedor">
+    <Key>
+      <PropertyRef Name="Juridica" />
+    </Key>
+    <Property Name="Juridica" Type="Int32" Nullable="false" />
+    <Property Name="Ente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_Activo_Vendedor" FromRole="Vendedor" ToRole="Activo" />
+  </EntityType>
+  <Association Name="FK_Usuario_CategoriaUsuario">
+    <End Role="CategoriaUsuario" Type="Self.CategoriaUsuario" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaUsuario">
+        <PropertyRef Name="IdCategoriaUsuario" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdCategoriaUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_ActivosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aseguradora" EntityType="Self.Aseguradora" />
+    <EntitySet Name="CategoriaActivo" EntityType="Self.CategoriaActivo" />
+    <EntitySet Name="CategoriaUsuario" EntityType="Self.CategoriaUsuario" />
+    <EntitySet Name="Marca" EntityType="Self.Marca" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="Vendedor" EntityType="Self.Vendedor" />
+    <AssociationSet Name="FK_Usuario_CategoriaUsuario" Association="Self.FK_Usuario_CategoriaUsuario">
+      <End Role="CategoriaUsuario" EntitySet="CategoriaUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <EntitySet Name="HistoricoDepreciacion" EntityType="ActivosModel.HistoricoDepreciacion" />
+    <EntitySet Name="Activo" EntityType="ActivosModel.Activo" />
+    <AssociationSet Name="FK_Activo_Aseguradora" Association="ActivosModel.FK_Activo_Aseguradora">
+      <End Role="Aseguradora" EntitySet="Aseguradora" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activo_CategoriaActivo" Association="ActivosModel.FK_Activo_CategoriaActivo">
+      <End Role="CategoriaActivo" EntitySet="CategoriaActivo" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activo_Marca" Association="ActivosModel.FK_Activo_Marca">
+      <End Role="Marca" EntitySet="Marca" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activo_Usuario" Association="ActivosModel.FK_Activo_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activo_Vendedor" Association="ActivosModel.FK_Activo_Vendedor">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoricoDepreciacion_Activo" Association="ActivosModel.FK_HistoricoDepreciacion_Activo">
+      <End Role="Activo" EntitySet="Activo" />
+      <End Role="HistoricoDepreciacion" EntitySet="HistoricoDepreciacion" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HistoricoDepreciacion">
+    <Key>
+      <PropertyRef Name="Consecutivo" />
+    </Key>
+    <Property Name="Consecutivo" Type="Int32" Nullable="false" />
+    <Property Name="IdActivo" Type="Int32" Nullable="false" />
+    <Property Name="Depreciacion" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="FechaDepreciacion" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Activo" Relationship="ActivosModel.FK_HistoricoDepreciacion_Activo" FromRole="HistoricoDepreciacion" ToRole="Activo" />
+  </EntityType>
+  <EntityType Name="Activo">
+    <Key>
+      <PropertyRef Name="IdActivo" />
+    </Key>
+    <Property Name="IdActivo" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+    <Property Name="IdCategoriaActivo" Type="Int32" Nullable="false" />
+    <Property Name="IdAseguradora" Type="Int32" Nullable="false" />
+    <Property Name="IdMarca" Type="Int32" Nullable="false" />
+    <Property Name="NumeroSerie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Modelo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ValorActual" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CostoColones" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CostoDolares" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VencimientoGarantia" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VencimientoSeguro" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="imgActivo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="imgFactura" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Aseguradora" Relationship="ActivosModel.FK_Activo_Aseguradora" FromRole="Activo" ToRole="Aseguradora" />
+    <NavigationProperty Name="CategoriaActivo" Relationship="ActivosModel.FK_Activo_CategoriaActivo" FromRole="Activo" ToRole="CategoriaActivo" />
+    <NavigationProperty Name="Marca" Relationship="ActivosModel.FK_Activo_Marca" FromRole="Activo" ToRole="Marca" />
+    <NavigationProperty Name="Usuario" Relationship="ActivosModel.FK_Activo_Usuario" FromRole="Activo" ToRole="Usuario" />
+    <NavigationProperty Name="Vendedor" Relationship="ActivosModel.FK_Activo_Vendedor" FromRole="Activo" ToRole="Vendedor" />
+    <NavigationProperty Name="HistoricoDepreciacion" Relationship="ActivosModel.FK_HistoricoDepreciacion_Activo" FromRole="Activo" ToRole="HistoricoDepreciacion" />
+  </EntityType>
+  <Association Name="FK_Activo_Aseguradora">
+    <End Type="ActivosModel.Aseguradora" Role="Aseguradora" Multiplicity="1" />
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aseguradora">
+        <PropertyRef Name="IdAseguradora" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdAseguradora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activo_CategoriaActivo">
+    <End Type="ActivosModel.CategoriaActivo" Role="CategoriaActivo" Multiplicity="1" />
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoriaActivo">
+        <PropertyRef Name="IdCategoriaActivo" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdCategoriaActivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activo_Marca">
+    <End Type="ActivosModel.Marca" Role="Marca" Multiplicity="1" />
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marca">
+        <PropertyRef Name="IdMarca" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activo_Usuario">
+    <End Type="ActivosModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activo_Vendedor">
+    <End Type="ActivosModel.Vendedor" Role="Vendedor" Multiplicity="1" />
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="Juridica" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoricoDepreciacion_Activo">
+    <End Type="ActivosModel.Activo" Role="Activo" Multiplicity="1" />
+    <End Type="ActivosModel.HistoricoDepreciacion" Role="HistoricoDepreciacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activo">
+        <PropertyRef Name="IdActivo" />
+      </Principal>
+      <Dependent Role="HistoricoDepreciacion">
+        <PropertyRef Name="IdActivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

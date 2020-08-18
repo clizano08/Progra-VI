@@ -1,0 +1,39 @@
+﻿@model Infraestructure.Models.CategoriaActivo
+
+@{
+    ViewBag.Title = "Categoria de Activo";
+}
+
+<h2>Eliminar Categoria del Activo</h2>
+
+<h3>Seguro que quiere eliminar esto?</h3>
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCategoriaActivo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "CategoriaActivo", new { @id = Model.IdCategoriaActivo}, FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger btn-lg" /> 
+            @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    }
+</div>

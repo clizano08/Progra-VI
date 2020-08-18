@@ -1,0 +1,39 @@
+﻿@model Infraestructure.Models.Aseguradora
+
+@{
+    ViewBag.Title = "Aseguradora";
+}
+
+<h2>Eliminar Aseguradora</h2>
+
+<h3>Seguro que quiere eliminar esto?</h3>
+<div>
+    <h4>Aseguradora</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdAseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdAseguradora)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Aseguradora", new { @id = Model.IdAseguradora }, FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger btn-lg" /> 
+            @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    }
+</div>

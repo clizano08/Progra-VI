@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+@{
+    ViewBag.Title = "Activo";
+}
+
+<h2>Lista de Activos</h2>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
+@Html.Raw(mensaje);
+}
+<p>
+    @Html.ActionLink("Nuevo", "Create", null, new { @class= "btn btn-info btn-md"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </th>
+       
+
+        <th>
+            @Html.DisplayNameFor(model => model.IdMarca)
+
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumeroSerie)
+    </td>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.Estado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ValorActual)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.VencimientoGarantia)
+    </td>
+   
+    <td>
+        @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+    </td>
+   
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoriaActivo.Descripcion)
+    </td>
+
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.IdActivo }, new { @class = "btn  btn-primary btn-md " })
+        @Html.ActionLink("Detalles", "Details", new { id = item.IdActivo }, new { @class = "btn btn-warning btn-md " })
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdActivo }, new { @class = "btn  btn-danger  btn-md " })
+    </td>
+</tr>
+    }
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/toastjs")
+    <script>
+    $(document).ready(function () {
+    console.log("Entro a JQuery")
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1200",
+        "timeOut": "5500",
+        "extendedTimeOut": "1200",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    // Recibe los parámetros del Controller
+    var option = '@TempData["Action"]'
+    var message = '@TempData["Mensaje"]'
+
+
+    if (option == 'S') {
+    toastr.success("El Activo fue salvado correctamente");
+    }
+
+
+    if (option == 'D') {
+        toastr.warning("El Activo fue borrado correctamente");
+    }
+
+
+    if (option == 'U') {
+        toastr.info("El Activo fue actualizado correctamente");
+    }
+
+    if (option == 'E') {
+            toastr.error("Se ha producido un error :" + message);
+    }
+
+
+    // Cambiar el color del fondo del Grid.
+    $(".table tbody tr:even").css("background-color", "#ddd");
+    });
+
+
+
+    </script>
+
+}

@@ -1,0 +1,252 @@
+﻿@model Infraestructure.Models.Activo
+
+@{
+    ViewBag.Title = "Activo";
+}
+
+<h2>Editar Activo</h2>
+
+
+@using (Html.BeginForm("Save", "Activo", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdActivo)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdUsuario, "Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdUsuario, new SelectList(ViewBag.ListaUsuario, "IdUsuario", "Nombre"), htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdVendedor, "Ente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdVendedor, new SelectList(ViewBag.ListaVendedor, "Juridica", "Ente"), htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.IdVendedor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdCategoriaActivo, "CategoriaActivo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdCategoriaActivo, new SelectList(ViewBag.ListaCategoriaActivo, "IdCategoriaActivo", "Descripcion"), htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.IdCategoriaActivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdAseguradora, "Aseguradora", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdAseguradora, new SelectList(ViewBag.ListaAseguradora, "IdAseguradora", "Descripcion"), htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.IdAseguradora, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdMarca, "Marca", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.TextBoxFor(model => model.IdMarca, "", new { @class = "form-control", @id = "txtCodigoMarca" })
+                @Html.Label("txtDescripcionMarca", "-", htmlAttributes: new { @class = "control-label" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumeroSerie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumeroSerie, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroSerie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Modelo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Modelo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="checkbox">
+                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+
+
+
+                @*RadioButtons*@
+                @Html.Label("Excelente")
+                @*El último parámetro indica el checked por default*@
+                @Html.RadioButtonFor(model => model.Estado, "Excelente",
+                                      new { Checked = true })
+                @Html.Label("Bueno")
+                @Html.RadioButtonFor(model => model.Estado, "Bueno")
+                @Html.Label("Regular")
+                @Html.RadioButtonFor(model => model.Estado, "Regular")
+                @Html.Label("Malo")
+                @Html.RadioButtonFor(model => model.Estado, "Malo")
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ValorActual, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ValorActual, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ValorActual, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaCompra, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FechaCompra, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VencimientoGarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VencimientoGarantia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VencimientoGarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VencimientoSeguro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VencimientoSeguro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VencimientoSeguro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imgActivo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imgActivo)" id="ImagenActivo" style="height:200px;width:200px">
+                @*Hay que colocarlo como oculto para que se pueda volver a enviar!*@
+                @Html.HiddenFor(model => model.imgActivo)
+                @Html.ValidationMessageFor(model => model.imgActivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.imgFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imgFactura)" id="ImagenFactura" style="height:200px;width:200px">
+                @*Hay que colocarlo como oculto para que se pueda volver a enviar!*@
+                @Html.HiddenFor(model => model.imgFactura)
+                @Html.ValidationMessageFor(model => model.imgFactura, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a Lista", "Index", null, new { @class= "btn btn-primary btn-lg" })
+</div>
+
+@section Scripts {
+    @* Validaciones en Javascript, si la siguiente línea NO va, las validaciones no se ejecutan en el cliente *@
+    @Scripts.Render("~/bundles/jqueryval")
+    @*Se utilizan para el Autocomplete*@
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqueryui")
+
+
+    <script>
+
+        //////////////////////////////////////////////
+        // Busca el código del Marca por nombre  //
+        //////////////////////////////////////////////
+        $("#txtCodigoMarca").focus(function () {
+            // Limpia la caja de texto
+            $("#txtCodigoMarca").val("");
+            console.log($("label[for*='txtDescripcionMarca']").html());
+            $("label[for*='txtDescripcionMarca']").html("-");
+
+        });
+
+        // var precioProducto = 0.0;
+        // Click encima del codigo del producto para buscarlo
+        $("#txtCodigoMarca").autocomplete({
+            source: function (request, response) {
+                // Limpiar la imagen
+               // $("#ImgProducto").attr("src", "/Images/nophoto.jpg");
+                // leer los datos de la descripción
+                var texto = $("#txtCodigoMarca").val();
+                // Invocar al Controller por Ajax
+                $.ajax({
+                    type: "GET",
+                    url: "/Marca/GetMarcaByName",
+                    dataType: "json",
+                    data: { name: texto },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+
+                            // Label lo que muestra e item lo que coloca en la caja de texto, data para todo el objeto seleccionado.
+                            return { label: item.Descripcion, value: item.IdMarca, data: item };
+
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+
+                        // debugger;
+                        alert("Error: " + error + ", No Error: " + xhr.status);
+                    },
+                });
+            },
+            select: function (event, ui) {
+
+                // Colocar el valor
+                $("#txtCodigoMarca").val(ui.item.value);
+                // Coloca el precio
+                //$("#txtPrecioProducto").val(ui.item.data.Precio);
+                // Coloca datos en el Label
+                $("label[for*='txtDescripcionMarca']").html(ui.item.label);
+                // Muestra la imagen que  por venir en un NewtonSoft Json ya viene serializada en base64 NO hay que convertirla
+                //$("#ImgProducto").attr("src", "data:image/jpeg;charset=utf-8;base64," + ui.item.data.Imagen);
+                // Coloca el foto
+                //$("txtCantidadProducto").focus();
+                // Se sale
+                return false;
+            }, statusCode: {
+                404: function (content) { alert('cannot find resource'); },
+                500: function (content) { alert('internal server error'); }
+            },
+            error: function (xhr, status, error) {
+                // Muestra posibles errores
+                alert("Error: " + error + ", No Error: " + xhr.status);
+            }
+        });
+    </script>
+}

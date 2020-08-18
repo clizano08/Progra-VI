@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdActivo)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoSeguro)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.IdAseguradora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdMarca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdVendedor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdActivo)
+    </td>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ValorActual)
+    </td>
+  
+    <td>
+        @Html.DisplayFor(modelItem => item.FechaCompra)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VencimientoGarantia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VencimientoSeguro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Aseguradora.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoriaActivo.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vendedor.Ente)
+    </td>
+
+</tr>
+}
+
+</table>

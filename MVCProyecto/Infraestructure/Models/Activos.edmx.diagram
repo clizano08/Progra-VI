@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3df8f5e2e9e6403488cf9e997cf23668" Name="Diagram1">
+        <EntityTypeShape EntityType="ActivosModel.Aseguradora" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActivosModel.CategoriaActivo" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActivosModel.CategoriaUsuario" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActivosModel.Marca" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActivosModel.Usuario" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ActivosModel.Vendedor" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="ActivosModel.FK_Usuario_CategoriaUsuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ActivosModel.HistoricoDepreciacion" Width="1.5" PointX="7.375" PointY="3.875" />
+        <EntityTypeShape EntityType="ActivosModel.Activo" Width="1.5" PointX="5.375" PointY="2.5" />
+        <AssociationConnector Association="ActivosModel.FK_Activo_Aseguradora" />
+        <AssociationConnector Association="ActivosModel.FK_Activo_CategoriaActivo" />
+        <AssociationConnector Association="ActivosModel.FK_Activo_Marca" />
+        <AssociationConnector Association="ActivosModel.FK_Activo_Usuario" />
+        <AssociationConnector Association="ActivosModel.FK_Activo_Vendedor" />
+        <AssociationConnector Association="ActivosModel.FK_HistoricoDepreciacion_Activo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

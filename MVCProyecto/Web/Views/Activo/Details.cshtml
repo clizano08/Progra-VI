@@ -1,0 +1,164 @@
+﻿@model Infraestructure.Models.Activo
+
+@{
+    ViewBag.Title = "Activo";
+}
+
+<h2>Detalle de Activo</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdActivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdActivo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoColones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoColones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoDolares)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoDolares)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VencimientoGarantia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VencimientoSeguro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VencimientoSeguro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgActivo)
+        </dt>
+
+        <dd>
+            <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imgActivo)" id="ImagenActivo" style="height:200px;width:200px">
+            @*Hay que colocarlo como oculto para que se pueda volver a enviar!*@
+            @Html.HiddenFor(model => model.imgActivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgFactura)
+        </dt>
+
+        <dd>
+            <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imgFactura)" id="ImagenFactura" style="height:200px;width:200px">
+            @*Hay que colocarlo como oculto para que se pueda volver a enviar!*@
+            @Html.HiddenFor(model => model.imgFactura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdAseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aseguradora.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCategoriaActivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaActivo.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMarca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdVendedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor.Ente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdActivo }, new {@class= "btn  btn-primary btn-lg" }) 
+    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class= "btn btn-primary btn-lg" })
+</p>

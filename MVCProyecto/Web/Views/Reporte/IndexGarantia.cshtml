@@ -1,0 +1,79 @@
+﻿@model Web.ViewModels.ViewModelGarantia
+
+@{
+    ViewBag.Title = "Reportes";
+}
+
+<h2>Vencimiento de Garantía</h2>
+
+
+@using (Ajax.BeginForm("AjaxVencimientoGarantiaRango", "Reporte", null, new AjaxOptions
+{
+
+    HttpMethod = "GET",
+    OnFailure = "onFailureResult",
+    OnSuccess = "onSuccessResult",
+    OnBegin = "onBeginSubmit",
+    UpdateTargetId = "resultado",
+    InsertionMode = InsertionMode.Replace
+}, new { id = "AjaxForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IniGarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IniGarantia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IniGarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FinGarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FinGarantia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FinGarantia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Consultar" class="btn btn-info btn-block" />
+            </div>
+        </div>
+    </div>
+    @*Muestra el efecto de la imagen*@
+    <img id="AjaxLoader" class="center-block" alt="Enviando ..." style="height:100px;width:100px; display:none" src="~/Images/loading.gif" />
+    @*Muestra un resultado*@
+    <div id="resultado" />
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    <!-- AL COMENZAR EL SUBMIT -->
+    <script>
+        var onBeginSubmit = function () {
+            // Mostramos el Ajax Loader
+            $("#AjaxLoader").show("slow");
+
+            // Deshabilitamos el botón de Submit
+            $("#SubmitBtn").prop("disabled", true);
+        };
+    </script>
+    <script>
+        var onSuccessResult = function () {
+            // Mostramos el Ajax Loader
+            $("#AjaxLoader").hide("slow");
+
+
+        };
+    </script>
+}
+
